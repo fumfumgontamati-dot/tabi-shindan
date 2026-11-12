@@ -269,7 +269,7 @@ footer{text-align:center;font-size:15px;color:var(--sub);margin-top:30px}
     for(var c=0;c<22;c++){ var p=document.createElement('i'); p.style.left=(Math.random()*96+2)+'%'; p.style.background=CC[c%CC.length]; p.style.animationDelay=(Math.random()*.6)+'s'; p.style.transform='rotate('+(Math.random()*180)+'deg)'; cf.appendChild(p); }
     if(gm&&km){
       $('rText').textContent=body;
-      $('gName').textContent=gm[1]; $('kw').textContent=km[1]; $('gift').hidden=false;
+      $('gName').textContent=gm[1]; $('gName').parentNode.style.fontSize=gm[1].length>11?'16px':''; $('kw').textContent=km[1]; $('gift').hidden=false;
       $('kwTip').textContent='タップすると言葉をコピーできます'; $('kwTip').className='kw-tip';
     } else { $('rText').textContent=T.text; $('gift').hidden=true; }
     $('rBtn').textContent=LINE.button; $('rBtn').href=LINE.url; $('rNote').textContent=LINE.note;
