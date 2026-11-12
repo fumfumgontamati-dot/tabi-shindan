@@ -128,16 +128,6 @@ footer{text-align:center;font-size:15px;color:var(--sub);margin-top:30px}
 .pt .pt-h{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:900;color:var(--green);margin:0 0 2px}
 .pt-h svg{width:20px;height:20px;fill:none;stroke:var(--gold);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 @keyframes up{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:none}}
-.mix{text-align:left;border-top:1px dashed var(--line);padding:14px 0 4px;margin:0 0 16px}
-.mix-h{font-size:16px;font-weight:900;color:var(--sub);margin:0 0 6px;text-align:center}
-.mrow{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:15px;font-weight:700;color:var(--sub)}
-.mrow img{width:30px;height:30px;object-fit:contain;flex:none;mix-blend-mode:multiply}
-.mrow .mn{width:8.4em;flex:none;white-space:nowrap;font-size:14px}
-.mrow .bar{flex:1;min-width:40px;height:12px;background:var(--soft);border-radius:6px;overflow:hidden}
-.mrow .bar i{display:block;height:100%;background:var(--line);border-radius:6px;transform-origin:0 50%;animation:grow .8s ease-out .9s both}
-@keyframes grow{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
-.mrow.top{color:var(--navy)}
-.mrow.top .bar i{background:var(--gold)}
 .confetti{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
 .confetti i{position:absolute;top:-14px;width:8px;height:12px;border-radius:2px;opacity:0;animation:fall 1.8s ease-in forwards}
 @keyframes fall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(420px) rotate(540deg)}}
@@ -154,7 +144,7 @@ footer{text-align:center;font-size:15px;color:var(--sub);margin-top:30px}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 .kw-tip{font-size:15px;font-weight:700;color:var(--sub);margin:10px 0 0}
 .kw-tip.ok{color:var(--green)}
-@media (prefers-reduced-motion:reduce){.pets img,.rpic,.kw{animation:none}.pt{animation:none;opacity:1}.confetti{display:none}.mrow .bar i{animation:none}}[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.pets img,.rpic,.kw{animation:none}.pt{animation:none;opacity:1}.confetti{display:none}}[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -192,12 +182,7 @@ footer{text-align:center;font-size:15px;color:var(--sub);margin-top:30px}
       <div class="pt"><p class="pt-h"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/></svg>得意なこと</p><p id="pGood"></p></div>
       <div class="pt"><p class="pt-h"><svg viewBox="0 0 24 24"><path d="M4 19h16M7 19c0-3 2-5 5-5s5 2 5 5M12 14V5M12 5l4 2-4 2"/></svg>つまずきやすい所</p><p id="pTrip"></p></div>
       <div class="pt"><p class="pt-h"><svg viewBox="0 0 24 24"><ellipse cx="8" cy="15" rx="2.6" ry="3.6"/><ellipse cx="16" cy="9" rx="2.6" ry="3.6"/><path d="M7 20.5h2M15 14.5h2"/></svg>次の一歩</p><p id="pNext"></p></div>
-    </div>
-    <div class="mix" id="mix">
-      <p class="mix-h">あなたの答えの内わけ</p>
-      <div id="mixRows"></div>
-    </div>
-    <div class="gift" id="gift" hidden>
+    </div>    <div class="gift" id="gift" hidden>
       <p class="gift-h"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M2.5 9h19M12 9v11.5"/><path d="M12 9c-1.5-3.5-5.5-4-5.5-1.5S10 9 12 9zM12 9c1.5-3.5 5.5-4 5.5-1.5S14 9 12 9z"/></svg>このタイプの方への特典</p>
       <p class="gift-n">「<span id="gName"></span>」</p>
       <ol class="steps">
@@ -255,15 +240,6 @@ footer{text-align:center;font-size:15px;color:var(--sub);margin-top:30px}
       $('pGood').textContent=body.slice(0,i1); $('pTrip').textContent=body.slice(i1+K1.length,i2); $('pNext').textContent=body.slice(i2+K2.length);
       $('pts').hidden=false; $('rText').hidden=true;
     } else { $('pts').hidden=true; $('rText').hidden=false; }
-    var mr=$('mixRows'); mr.innerHTML='';
-    Object.keys(TYPES).forEach(function(k){
-      var row=document.createElement('div'); row.className='mrow'+(k===best?' top':'');
-      if(PICS[k]){ var im=document.createElement('img'); im.src=PICS[k]; im.alt=''; row.appendChild(im); }
-      var nm=document.createElement('span'); nm.className='mn'; nm.textContent=TYPES[k].name; row.appendChild(nm);
-      var bar=document.createElement('span'); bar.className='bar'; var fill=document.createElement('i'); bar.appendChild(fill); row.appendChild(bar);
-      mr.appendChild(row);
-      fill.style.width=Math.round(score[k]/Math.max(1,ans.length)*100)+'%';
-    });
     var cf=$('confetti'); cf.innerHTML='';
     var CC=['#F07A1C','#FFE27A','#008E78','#F4B6C2','#A9C7E8'];
     for(var c=0;c<22;c++){ var p=document.createElement('i'); p.style.left=(Math.random()*96+2)+'%'; p.style.background=CC[c%CC.length]; p.style.animationDelay=(Math.random()*.6)+'s'; p.style.transform='rotate('+(Math.random()*180)+'deg)'; cf.appendChild(p); }
